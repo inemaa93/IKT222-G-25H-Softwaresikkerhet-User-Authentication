@@ -45,8 +45,6 @@ python run.py
 Serveren er på:
 http://127.0.0.1:5000
 
--
-
 🧩 Test API-endepunktene - Dette gjøres på en ny powershell inne i riktig fil mens den første powershellen har oppe Flask-serveren
 🔸 Registrer bruker
 
@@ -55,6 +53,7 @@ Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register"
   -Body {"username":"alice","password":"S3kretPa55"}
 
 Du skal få følgende beskjed:
+
 message
 -------
 User registered successfully
@@ -65,6 +64,7 @@ Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/login"
   -Body {"username":"alice","password":"S3kretPa55"}
 
 Da skal du få fælgende tilbakemelding:
+
 message          user
 -------          ----
 Login successful alice
@@ -84,6 +84,7 @@ Login successful alice
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
