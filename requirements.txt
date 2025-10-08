@@ -1,0 +1,7 @@
+Flask
+flask-bcrypt
+python-dotenv
+requests
+qrcode
+pyotp
+pytest
