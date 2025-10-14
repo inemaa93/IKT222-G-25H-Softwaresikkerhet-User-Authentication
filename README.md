@@ -8,7 +8,7 @@ Prosjektet er delt mellom flere personer – **Person A** (Ine) har ansvaret for
 
 ## 👩‍💻 Ine – Ansvarsområde
 
-Person A har gjort følgende:
+Ine har gjort følgende:
 
 - Opprettet prosjektstruktur og aktivert virtuelt miljø (`.venv`)
 - Installert og konfigurert Flask
@@ -114,6 +114,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
