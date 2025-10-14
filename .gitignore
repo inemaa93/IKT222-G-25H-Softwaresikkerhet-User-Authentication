@@ -1,0 +1,19 @@
+# Ignore virtual environment
+.venv/
+
+
+
+__pycache__/
+*.pyc
+
+.env
+.env.*
+
+*.db
+*.sqlite3
+
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
