@@ -84,9 +84,6 @@ Login successful alice
 ---
 
 
-The next three sections are currently only available through the branch called nina, so make sure to switch to that branch before continuing.
-
-
 ## Brute-force Protection
 There are currently two users available, Bob and Alice, but you can also create a new user before testing this out. After choosing a user, attempt to log in to this user with the wrong password three times. This will lock the user out for a certain amount of time, and is visible through a message if a new log-in is attempted. 
 
@@ -117,6 +114,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
