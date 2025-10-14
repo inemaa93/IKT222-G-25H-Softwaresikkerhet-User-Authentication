@@ -1,4 +1,4 @@
-# 🔐 Auth Project – Person A (Ine)
+# 🔐 Auth Project – Ine
 
 Dette prosjektet er et Flask-basert autentiseringssystem som håndterer registrering, innlogging og passordhashing.
 
@@ -6,7 +6,7 @@ Prosjektet er delt mellom flere personer – **Person A** (Ine) har ansvaret for
 
 ---
 
-## 👩‍💻 Person A – Ansvarsområde
+## 👩‍💻 Ine – Ansvarsområde
 
 Person A har gjort følgende:
 
@@ -83,10 +83,9 @@ Login successful alice
 
 ---
 
-✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
-
 
 The next three sections are currently only available through the branch called nina, so make sure to switch to that branch before continuing.
+
 
 ## Brute-force Protection
 There are currently two users available, Bob and Alice, but you can also create a new user before testing this out. After choosing a user, attempt to log in to this user with the wrong password three times. This will lock the user out for a certain amount of time, and is visible through a message if a new log-in is attempted. 
@@ -114,6 +113,11 @@ curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_sec
 - Replace "THE_CODE" part with the actual code you have received
 
 If all goes well, you should see an access token, a token type, and an expiration date.
+
+---
+
+✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
