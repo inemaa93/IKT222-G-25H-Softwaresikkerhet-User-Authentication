@@ -85,7 +85,8 @@ Login successful alice
 
 
 ## Brute-force Protection
-There are currently two users available, Bob and Alice, but you can also create a new user before testing this out. After choosing a user, attempt to log in to this user with the wrong password three times. This will lock the user out for a certain amount of time, and is visible through a message if a new log-in is attempted. 
+There are currently two users available, Bob and Alice, but you can also create a new user before testing this out. After choosing a user, attempt to log in to this user with the wrong password three times. This will lock the user out for a certain amount of time, and is visible through a message if a new log-in is attempted.
+- Add this migration before attempting: python .\scripts\add_totp_columns.py
 
 ## Two-Factor Authentication
 Start the project in .venv and write: python run.py
@@ -114,6 +115,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
