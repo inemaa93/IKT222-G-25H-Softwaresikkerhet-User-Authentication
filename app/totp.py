@@ -3,7 +3,7 @@ import qrcode
 import io
 import base64
 
-ISSUER_NAME = "AuthProject"  # change if you want your app name here
+ISSUER_NAME = "IKT222-G-25H-Softwaresikkerhet-User-Authentication"
 
 def generate_totp_secret() -> str:
     return pyotp.random_base32()
