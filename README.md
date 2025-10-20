@@ -29,17 +29,17 @@ git clone (https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authe
 
 cd auth-project
 
-3. Aktiver virtuelt miljø (Windows) Powershell
+2. Aktiver virtuelt miljø (Windows) Powershell
    
 python -m venv .venv
 
 .venv\Scripts\Activate.ps1
 
-5. Installer avhengigheter
+3. Installer avhengigheter
    
 pip install flask bcrypt
 
-7. Initialiser databasen
+4. Initialiser databasen
    
 python app\db.py
 
@@ -131,6 +131,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
