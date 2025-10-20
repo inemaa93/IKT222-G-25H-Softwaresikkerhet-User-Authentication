@@ -164,6 +164,8 @@ Før du tester dette, kjør:
 
 python .\scripts\add_totp_columns.py
 
+---
+
 📱 Two-Factor Authentication (2FA)
 
 Start Flask-serveren:
@@ -177,6 +179,8 @@ python .\scripts\test_2fa_bob.py
 
 
 Du får da opp QR-kode og kan teste 2FA-flyten.
+
+---
 
 🔑 OAuth2
 
@@ -199,7 +203,10 @@ curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_sec
 
 Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 
+---
+
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
 
 
