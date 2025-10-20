@@ -1,6 +1,6 @@
 import json
 from run import app
-from app.db import init_db
+from db import init_db
 
 def setup_module(module):
     # Initialiser database før testene kjøres

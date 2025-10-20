@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session
 from flask_bcrypt import Bcrypt
-from app.db import get_db_connection
+from db import get_db_connection
 from app.bruteforce import init_table, is_locked, record_failed, reset_attempts
 from app import totp as totp_utils
 

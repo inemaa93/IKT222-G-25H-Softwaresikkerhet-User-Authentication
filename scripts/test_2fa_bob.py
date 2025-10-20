@@ -5,8 +5,8 @@ import base64
 import os
 
 BASE = "http://127.0.0.1:5000"
-USERNAME = "bob"
-PASSWORD = "MyStrongPa55"
+USERNAME = "admin"
+PASSWORD = "admin"
 
 s = requests.Session()
 
