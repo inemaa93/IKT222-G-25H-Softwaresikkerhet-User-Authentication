@@ -83,8 +83,6 @@ Admin-bruker 'admin' ble lagt til
 
 👤 Standard admin-bruker
 
-(kun for testing — bytt før produksjon)
-
 Brukernavn: admin
 Passord: admin
 
@@ -97,7 +95,7 @@ Serveren kjører nå på:
 
 🧩 Test API-endepunktene
 
-Åpne et nytt PowerShell-vindu (mens serveren kjører).
+Åpne et nytt PowerShell-vindu (mens serveren kjører i det originale Powershell vinduet).
 
 🔸 Registrer bruker
 Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register" `
@@ -188,5 +186,6 @@ curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_sec
 Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
 
