@@ -1,4 +1,4 @@
-# 🔐 Auth Project – Ine
+# 🔐 Auth Project
 
 Dette prosjektet er et Flask-basert autentiseringssystem som håndterer registrering, innlogging og passordhashing.
 
@@ -115,6 +115,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
