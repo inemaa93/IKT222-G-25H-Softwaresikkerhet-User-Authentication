@@ -1,145 +1,189 @@
-# 🔐 Auth Project
+🔐 Auth Project
 
-Dette prosjektet er et Flask-basert autentiseringssystem som håndterer registrering, innlogging og passordhashing.
+Dette prosjektet er et Flask-basert autentiseringssystem som håndterer registrering, innlogging, passordhashing og tofaktorautentisering (2FA).
 
-Prosjektet er delt mellom flere personer – **Person A** (Ine) har ansvaret for å sette opp grunnstrukturen og backend-funksjonaliteten.
+Prosjektet er delt mellom flere personer – Person A (Ine) har ansvaret for å sette opp grunnstrukturen og backend-funksjonaliteten.
 
 ---
 
-## 👩‍💻 Ine – Ansvarsområde
+
+👩‍💻 Ine – Ansvarsområde
 
 Ine har gjort følgende:
 
-- Opprettet prosjektstruktur og aktivert virtuelt miljø (`.venv`)
-- Installert og konfigurert Flask
-- Opprettet SQLite-database (`users.db`) med tabellen `users`
-- Implementert register- og login-endepunkter
-- Sørget for at passord lagres sikkert med `bcrypt`
-- Testet API-endepunkter i PowerShell med `Invoke-RestMethod`
-- Opprettet `.env.example` og README.md for dokumentasjon
+Opprettet prosjektstruktur og aktivert virtuelt miljø (.venv)
+
+Installert og konfigurert Flask
+
+Opprettet SQLite-database (users.db) med tabellen users
+
+Implementert register- og login-endepunkter
+
+Sørget for at passord lagres sikkert med bcrypt
+
+Testet API-endepunkter i PowerShell med Invoke-RestMethod
+
+Opprettet .env.example og README.md for dokumentasjon
+
+Fikset import- og databasepath-feil slik at Flask nå starter riktig
+
+Oppdatert get_db_connection() og db.py
+
+Opprettet seed.py for å legge til admin-bruker automatisk
+
+Lagt til Pillow for QR-kodegenerering (2FA)
+
+Testet hele systemet med pytest – alle tester passerer ✅
 
 ---
 
 ⚙️ Oppsett lokalt
-1. Klon prosjektet
-   
-bash
+1️⃣ Klon prosjektet
+git clone https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git
+cd IKT222-G-25H-Softwaresikkerhet-User-Authentication
 
-git clone (https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git)
-
-cd auth-project
-
-2. Aktiver virtuelt miljø (Windows) Powershell
-   
+2️⃣ Aktiver virtuelt miljø (Windows PowerShell)
 python -m venv .venv
-
 .venv\Scripts\Activate.ps1
 
-3. Installer avhengigheter
-   
-pip install flask bcrypt
+3️⃣ Installer avhengigheter
+pip install -r requirements.txt
 
-4. Initialiser databasen
-   
-python app\db.py
+---
 
-Da skal det komme:
 
-✅ Database initialized.
+Hvis du ikke har en requirements.txt, kan du opprette den slik:
 
-🚀 Kjør Flask-serveren
+pip install flask bcrypt qrcode pillow pytest
+pip freeze > requirements.txt
 
+---
+
+🗃️ Initialiser databasen
+
+Kjør først:
+
+python db.py
+
+
+Du skal få meldingen:
+
+✅ Database initialized with schema.sql
+
+
+Deretter opprett admin-brukeren:
+
+python seed.py
+
+
+Output:
+
+Admin-bruker 'admin' ble lagt til
+
+👤 Standard admin-bruker
+
+(kun for testing — bytt før produksjon)
+
+Brukernavn: admin
+Passord: Admin1234
+
+🚀 Start Flask-serveren
 python run.py
 
-Serveren er på:
 
-http://127.0.0.1:5000
+Serveren kjører nå på:
+👉 http://127.0.0.1:5000
 
-🧩 Test API-endepunktene - Dette gjøres på en ny powershell inne i riktig fil mens den første powershellen har oppe Flask-serveren
+🧩 Test API-endepunktene
+
+Åpne et nytt PowerShell-vindu (mens serveren kjører).
 
 🔸 Registrer bruker
+Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register" `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{"username":"alice","password":"S3kretPa55"}'
 
-Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register" 
 
-  -Headers @{ "Content-Type" = "application/json" } 
-  
-  -Body {"username":"alice","password":"S3kretPa55"}
-
-Du skal få følgende beskjed:
+Respons:
 
 message
 -------
 User registered successfully
 
 🔸 Logg inn bruker
+Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/login" `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{"username":"alice","password":"S3kretPa55"}'
 
 
-Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/login" 
-  -Headers @{ "Content-Type" = "application/json" } 
-  
-  -Body {"username":"alice","password":"S3kretPa55"}
-
-Da skal du få fælgende tilbakemelding:
+Respons:
 
 message          user
 -------          ----
 Login successful alice
 
----
+🧪 Kjøre tester
 
-🗃️ Databasestruktur
+Etter at Flask-appen kjører som forventet, kan du teste systemet:
 
-| Kolonne       | Type      | Beskrivelse     |
-| ------------- | --------- | --------------- |
-| id            | INTEGER   | Primærnøkkel    |
-| username      | TEXT      | Brukernavn      |
-| password_hash | TEXT      | Hashet passord  |
-| created_at    | TIMESTAMP | Opprettelsestid |
+pytest -q
 
 
----
+Forventet resultat:
+
+..                                                                                                               [100%]
+2 passed, 7 warnings
+
+🧱 Databasestruktur
+Kolonne	Type	Beskrivelse
+id	INTEGER	Primærnøkkel
+username	TEXT	Brukernavn
+password_hash	TEXT	Hashet passord
+created_at	TIMESTAMP	Opprettelsestid
+🧰 Ekstra funksjonalitet
+🔐 Brute-force Protection
+
+Det finnes to brukere (Bob og Alice), men du kan også registrere nye.
+
+Etter tre feil innloggingsforsøk blir brukeren låst i en tidsperiode.
+
+Før du tester dette, kjør:
+
+python .\scripts\add_totp_columns.py
+
+📱 Two-Factor Authentication (2FA)
+
+Start Flask-serveren:
+
+python run.py
 
 
-## Brute-force Protection
-There are currently two users available, Bob and Alice, but you can also create a new user before testing this out. After choosing a user, attempt to log in to this user with the wrong password three times. This will lock the user out for a certain amount of time, and is visible through a message if a new log-in is attempted.
-- Add this migration before attempting: python .\scripts\add_totp_columns.py
+Åpne en ny PowerShell og kjør:
 
-## Two-Factor Authentication
-Start the project in .venv and write: python run.py
-- This starts the Flask server
+python .\scripts\test_2fa_bob.py
 
-Open a second Powershell window and write: python .\scripts\test_2fa_bob.py
-- This will allow you to try 2fa
 
-## OAuth2
-- Quick reminder, when you get the code from the URL, you have roughly 30 seconds to finish the process before the code becomes invalid. If it becomes invalid, restart the process to get a new code.
+Du får da opp QR-kode og kan teste 2FA-flyten.
 
-First, you must start the .venv, and then write: python oauth_demo.py
+🔑 OAuth2
 
-Once the demo is running, you can write: http://localhost:5000/auth?client_id=demo-client-id&redirect_uri=http://localhost:5000/callback&state=xyz
-- This will give you a new URL containing the code you need for the next part
-- REMEMBER! Don't have the Flask server running, as it will block this process
+Når du får en code fra URL-en, har du ~30 sekunder før den utløper.
 
-Look at the URL, your code will be between "code=" and "&state". Copy this code, add it to the code below and paste it into the Powershell window:
+Start med:
+
+python oauth_demo.py
+
+
+Besøk deretter:
+
+http://localhost:5000/auth?client_id=demo-client-id&redirect_uri=http://localhost:5000/callback&state=xyz
+
+
+Kopier koden fra URL-en (mellom code= og &state) og bruk den:
 
 curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_secret=demo-client-secret" -d "redirect_uri=http://localhost:5000/callback" http://localhost:5000/token
 
-- Replace "THE_CODE" part with the actual code you have received
 
-If all goes well, you should see an access token, a token type, and an expiration date.
+Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 
----
-
-✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
-
-
-
-
-
-
-
-
-
-
-
-
+✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
