@@ -25,7 +25,7 @@ Ine har gjort følgende:
    
 bash
 
-git clone (https://github.com/inemaa93/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git)
+git clone (https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git)
 
 cd auth-project
 
@@ -131,6 +131,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
