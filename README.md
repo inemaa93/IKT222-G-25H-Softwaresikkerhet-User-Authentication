@@ -86,7 +86,7 @@ Admin-bruker 'admin' ble lagt til
 (kun for testing — bytt før produksjon)
 
 Brukernavn: admin
-Passord: Admin1234
+Passord: admin
 
 🚀 Start Flask-serveren
 python run.py
@@ -188,4 +188,5 @@ curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_sec
 Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
