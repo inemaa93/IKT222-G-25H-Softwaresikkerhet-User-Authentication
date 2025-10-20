@@ -38,6 +38,7 @@ Testet hele systemet med pytest – alle tester passerer ✅
 ---
 
 ⚙️ Oppsett lokalt
+
 1️⃣ Klon prosjektet
 git clone https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git
 cd IKT222-G-25H-Softwaresikkerhet-User-Authentication
@@ -187,3 +188,4 @@ curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_sec
 Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
