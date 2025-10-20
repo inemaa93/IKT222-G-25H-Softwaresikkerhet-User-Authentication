@@ -40,14 +40,19 @@ Testet hele systemet med pytest – alle tester passerer ✅
 ⚙️ Oppsett lokalt
 
 1️⃣ Klon prosjektet
+
 git clone https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git
+
 cd IKT222-G-25H-Softwaresikkerhet-User-Authentication
 
 2️⃣ Aktiver virtuelt miljø (Windows PowerShell)
+
 python -m venv .venv
+
 .venv\Scripts\Activate.ps1
 
 3️⃣ Installer avhengigheter
+
 pip install -r requirements.txt
 
 ---
@@ -133,13 +138,22 @@ Forventet resultat:
 ..                                                                                                               [100%]
 2 passed, 7 warnings
 
+---
+
 🧱 Databasestruktur
+
 Kolonne	Type	Beskrivelse
+
 id	INTEGER	Primærnøkkel
+
 username	TEXT	Brukernavn
+
 password_hash	TEXT	Hashet passord
+
 created_at	TIMESTAMP	Opprettelsestid
+
 🧰 Ekstra funksjonalitet
+
 🔐 Brute-force Protection
 
 Det finnes to brukere (Bob og Alice), men du kan også registrere nye.
@@ -186,6 +200,7 @@ curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_sec
 Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
 
 
