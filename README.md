@@ -22,34 +22,47 @@ Ine har gjort følgende:
 
 ⚙️ Oppsett lokalt
 1. Klon prosjektet
+   
 bash
-git clone https://github.com/USERNAME/auth-project.git
+
+git clone [https://github.com/USERNAME/auth-project.git](https://github.com/inemaa93/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git)
+
 cd auth-project
 
-2. Aktiver virtuelt miljø (Windows) Powershell
+3. Aktiver virtuelt miljø (Windows) Powershell
+   
 python -m venv .venv
+
 .venv\Scripts\Activate.ps1
 
-3. Installer avhengigheter
+5. Installer avhengigheter
+   
 pip install flask bcrypt
 
-4. Initialiser databasen
+7. Initialiser databasen
+   
 python app\db.py
 
 Da skal det komme:
+
 ✅ Database initialized.
 
 🚀 Kjør Flask-serveren
+
 python run.py
 
 Serveren er på:
+
 http://127.0.0.1:5000
 
 🧩 Test API-endepunktene - Dette gjøres på en ny powershell inne i riktig fil mens den første powershellen har oppe Flask-serveren
+
 🔸 Registrer bruker
 
 Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register" 
+
   -Headers @{ "Content-Type" = "application/json" } 
+  
   -Body {"username":"alice","password":"S3kretPa55"}
 
 Du skal få følgende beskjed:
@@ -59,8 +72,11 @@ message
 User registered successfully
 
 🔸 Logg inn bruker
+
+
 Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/login" 
   -Headers @{ "Content-Type" = "application/json" } 
+  
   -Body {"username":"alice","password":"S3kretPa55"}
 
 Da skal du få fælgende tilbakemelding:
@@ -115,6 +131,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
