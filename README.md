@@ -61,6 +61,7 @@ pip install -r requirements.txt
 Hvis du ikke har en requirements.txt, kan du opprette den slik:
 
 pip install flask bcrypt qrcode pillow pytest
+
 pip freeze > requirements.txt
 
 ---
@@ -206,6 +207,7 @@ Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
 
 
