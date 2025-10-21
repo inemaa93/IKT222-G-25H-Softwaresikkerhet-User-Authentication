@@ -108,7 +108,7 @@ Login successful alice
 
 **In a new virtual server (not the one running the Flask)**
 - Add the script `add_topt_columns.py`
-   - **Copy + Paste Option:\** python .\scripts\add_totp_columns.py
+   - _Copy + Paste Option:_ python .\scripts\add_totp_columns.py
 
 To test the brute-force functionality, you must have a registered user in your system to test it with. Attempt to log in to a user, but write the wrong password three consecutive times. When you go for attempt number four, you will receive a new message, stating that you are currently locked-out and includes a timer (starts at 5 minutes). Each time you attempt to log in before the timer has run out, you will receive the same message (with an updated timer). Once the timer has run out, your attempt record has been reset, and you may retry logging in.
 
@@ -118,7 +118,7 @@ To test the brute-force functionality, you must have a registered user in your s
 
 **In a new virtual server (not the one running the Flask)**
 - Add the script `test_2fa_bob.py`
-  - **Copy + Paste Option:\** .\scripts\test_2fa_bob.py
+  - _Copy + Paste Option:_ .\scripts\test_2fa_bob.py
 
 This will run an automatic test showing the 2FA functionality.
 
@@ -144,6 +144,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
