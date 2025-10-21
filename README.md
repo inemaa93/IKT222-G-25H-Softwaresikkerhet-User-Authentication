@@ -101,18 +101,31 @@ Login successful alice
 
 
 ## Brute-force Protection
-There are currently two users available, Bob and Alice, but you can also create a new user before testing this out. After choosing a user, attempt to log in to this user with the wrong password three times. This will lock the user out for a certain amount of time, and is visible through a message if a new log-in is attempted.
-- Add this migration before attempting: python .\scripts\add_totp_columns.py
+
+### Before trying out the brute-force protection: 
+- Start your virtual server
+- Start the Flask application
+
+**In a new virtual server (not the one running the Flask)**
+- Add the script `add_topt_columns.py`
+   - **Copy + Paste Option:\** python .\scripts\add_totp_columns.py
+
+To test the brute-force functionality, you must have a registered user in your system to test it with. Attempt to log in to a user, but write the wrong password three consecutive times. When you go for attempt number four, you will receive a new message, stating that you are currently locked-out and includes a timer (starts at 5 minutes). Each time you attempt to log in before the timer has run out, you will receive the same message (with an updated timer). Once the timer has run out, your attempt record has been reset, and you may retry logging in.
 
 ## Two-Factor Authentication
-Start the project in .venv and write: python run.py
-- This starts the Flask server
+- Start your virtual server
+- Start the Flask application
 
-Open a second Powershell window and write: python .\scripts\test_2fa_bob.py
-- This will allow you to try 2fa
+**In a new virtual server (not the one running the Flask)**
+- Add the script `test_2fa_bob.py`
+  - **Copy + Paste Option:\** .\scripts\test_2fa_bob.py
+
+This will run an automatic test showing the 2FA functionality.
 
 ## OAuth2
-- Quick reminder, when you get the code from the URL, you have roughly 30 seconds to finish the process before the code becomes invalid. If it becomes invalid, restart the process to get a new code.
+
+### Quick Reminder Before Test
+- When you get the code from the URL, you have roughly 30 seconds to finish the process before the code becomes invalid. If it becomes invalid, restart the process to get a new code.
 
 First, you must start the .venv, and then write: python oauth_demo.py
 
@@ -131,6 +144,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
