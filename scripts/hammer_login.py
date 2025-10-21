@@ -33,7 +33,6 @@ def main():
         print("Lockout behavior found.")
     else:
         print("Test failed.")
-        # still attempt correct login to show outcome
     print("\n[+] Now try a correct login (may be locked out):")
     status, body = post_login(USERNAME, PASSWORD)
     print(f"  Correct login attempt: status={status} body={body}")
