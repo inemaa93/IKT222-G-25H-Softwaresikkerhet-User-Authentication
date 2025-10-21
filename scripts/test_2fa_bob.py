@@ -30,7 +30,7 @@ secret = data.get("secret")
 qrdata = data.get("qr")
 print("secret:", secret)
 
-# Optional: save QR image so you can open it locally
+# Optional: save QR image so you can open it locally (chat recommendation, not used)
 if qrdata and qrdata.startswith("data:image/png;base64,"):
     b64 = qrdata.split(",", 1)[1]
     os.makedirs("scripts", exist_ok=True)
@@ -40,7 +40,6 @@ if qrdata and qrdata.startswith("data:image/png;base64,"):
     print(f" QR saved to: {outpath}")
     print("  Open this image and scan it with Google Authenticator")
 
-#   Confirm using the current code from the secret
 code = pyotp.TOTP(secret).now()
 print("\nGenerated code (to confirm):", code)
 r = s.post(BASE + "/2fa/confirm", json={"code": code})
@@ -49,7 +48,6 @@ if r.status_code != 200:
     print("Confirmation failed.")
     raise SystemExit(1)
 
-#   Try a new login that requires totp
 print("\nTesting login with TOTP...")
 s2 = requests.Session()
 totp_code = pyotp.TOTP(secret).now()
