@@ -4,12 +4,9 @@ import os, secrets, time
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-# Mock client credentials (normally stored securely)
 CLIENT_ID = "demo-client-id"
 CLIENT_SECRET = "demo-client-secret"
 REDIRECT_URI = "http://localhost:5000/callback"
-
-# Temporary “databases”
 AUTH_CODES = {}
 TOKENS = {}
 
@@ -25,17 +22,15 @@ def auth():
     if client_id != CLIENT_ID or redirect_uri != REDIRECT_URI:
         return jsonify({"error": "invalid_client"}), 400
 
-    # Pretend the user clicked "Allow"
     auth_code = secrets.token_urlsafe(16)
     AUTH_CODES[auth_code] = {
         "client_id": client_id,
         "redirect_uri": redirect_uri,
-        "expires": time.time() + 60  # expires in 1 minute
+        "expires": time.time() + 60
     }
 
     print(f"[DEBUG] Issued auth code: {auth_code}")
 
-    # Redirect the user back with code and state
     return redirect(f"{redirect_uri}?code={auth_code}&state={state}")
 
 @app.route("/token", methods=["POST"])
@@ -58,14 +53,12 @@ def token():
     if redirect_uri != auth_data["redirect_uri"]:
         return jsonify({"error": "redirect_uri_mismatch"}), 400
 
-    # Generate access token
     access_token = secrets.token_urlsafe(24)
     TOKENS[access_token] = {
         "client_id": client_id,
-        "expires": time.time() + 300  # 5 minutes
+        "expires": time.time() + 300
     }
 
-    # Optionally delete used code
     del AUTH_CODES[code]
 
     print(f"[DEBUG] Issued access token: {access_token}")
@@ -90,7 +83,6 @@ def protected_resource():
     if not token_data or token_data["expires"] < time.time():
         return jsonify({"error": "invalid_or_expired_token"}), 401
 
-    # Token valid → return protected info
     return jsonify({
         "message": "Access granted!",
         "user_info": {
