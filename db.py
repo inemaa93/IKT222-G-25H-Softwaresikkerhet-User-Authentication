@@ -36,7 +36,7 @@ def init_db():
 def get_db_connection():
     """Opprett en tilkobling til databasen for Flask"""
     conn = sqlite3.connect(db_path, check_same_thread=False)
-    conn.row_factory = sqlite3.Row  # gjør at du får kolonnenavn i resultater
+    conn.row_factory = sqlite3.Row  
     return conn
 
 
