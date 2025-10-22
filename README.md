@@ -143,18 +143,26 @@ Login successful alice
 
 ---
 
-🧪 Kjøre tester
+## 🧪 Automated Testing
 
-Etter at Flask-appen kjører som forventet, kan du teste systemet:
+The project includes automated tests using **pytest** to verify authentication and login functionality.
 
+Before each test run, the test suite automatically deletes and reinitializes the database (`users.db`) using the schema in `schema.sql`.  
+This ensures a clean, isolated environment every time the tests run and prevents `409 Conflict` errors caused by previously registered users.
+
+To run the tests:
+
+bash
 pytest -q
 
 ---
+Expected output:
 
-Forventet resultat:
+ Slettet eksisterende database før testkjøring.
+ 
+..
+2 passed in 1.5s
 
-..                                                                                                               [100%]
-2 passed, 7 warnings
 
 ---
 
@@ -228,6 +236,7 @@ Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
 
 
