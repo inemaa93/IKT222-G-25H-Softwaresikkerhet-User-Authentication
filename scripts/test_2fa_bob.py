@@ -14,7 +14,6 @@ s = requests.Session()
 r = s.post(BASE + "/login", json={"username": USERNAME, "password": PASSWORD})
 print("login:", r.status_code, r.text)
 
-# Hvis login krever TOTP, hent fra databasen og prøv igjen
 if r.status_code == 401 and "totp_required" in r.text:
     print("  TOTP required — henter secret fra databasen...")
     conn = sqlite3.connect("users.db")
@@ -35,7 +34,6 @@ if r.status_code != 200:
     print(" Login failed — make sure the user exists and password is correct.")
     raise SystemExit(1)
 
-# Hvis brukeren ikke har aktivert TOTP enda, sett det opp
 conn = sqlite3.connect("users.db")
 cursor = conn.cursor()
 cursor.execute("SELECT totp_secret FROM users WHERE username = ?", (USERNAME,))
@@ -54,8 +52,7 @@ if not row or not row[0]:
     secret = data.get("secret")
     qrdata = data.get("qr")
     print("secret:", secret)
-
-    # Optional: save QR image so you can open it locally
+    
     if qrdata and qrdata.startswith("data:image/png;base64,"):
         b64 = qrdata.split(",", 1)[1]
         os.makedirs("scripts", exist_ok=True)
@@ -63,6 +60,7 @@ if not row or not row[0]:
         with open(outpath, "wb") as f:
             f.write(base64.b64decode(b64))
         print(f" QR saved to: {outpath}")
+        print("  Open this image and scan it with Google Authenticator")
 
     code = pyotp.TOTP(secret).now()
     print("\nGenerated code (to confirm):", code)
@@ -71,9 +69,7 @@ if not row or not row[0]:
     if r.status_code != 200:
         print("Confirmation failed.")
         raise SystemExit(1)
-
 else:
-    # Hvis brukeren allerede har secret, bruk den
     secret = row[0]
 
 print("\nTesting login with TOTP...")

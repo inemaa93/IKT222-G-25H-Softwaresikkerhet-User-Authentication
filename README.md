@@ -160,15 +160,14 @@ Expected output:
 
  Slettet eksisterende database før testkjøring.
  
-..
-2 passed in 1.5s
-
+.. 2 passed in 1.5s
 
 ---
 
 🧱 Databasestruktur
 
 Kolonne	Type	Beskrivelse
+
 
 id	INTEGER	Primærnøkkel
 
@@ -184,58 +183,54 @@ created_at	TIMESTAMP	Opprettelsestid
 
 ---
 
-🔐 Brute-force Protection
+## Brute-force Protection
 
-Det finnes to brukere (Bob og Alice), men du kan også registrere nye.
+### Before trying out the brute-force protection: 
+- Start your virtual server
+- Start the Flask application
 
-Etter tre feil innloggingsforsøk blir brukeren låst i en tidsperiode.
+**In a new virtual server (not the one running the Flask)**
+- Add the script `add_topt_columns.py`
+   - _Copy + Paste Option:_ python .\scripts\add_totp_columns.py
 
-Før du tester dette, kjør:
+To test the brute-force functionality, you must have a registered user in your system to test it with. Attempt to log in to a user, but write the wrong password three consecutive times. When you go for attempt number four, you will receive a new message, stating that you are currently locked-out and includes a timer (starts at 5 minutes). Each time you attempt to log in before the timer has run out, you will receive the same message (with an updated timer). Once the timer has run out, your attempt record has been reset, and you may retry logging in.
 
-python .\scripts\add_totp_columns.py
+## Two-Factor Authentication
+_Remember, this step won't work if the lock-out timer from the brute-force protection is still active, so either wait or restart the server if needed._
 
----
+- Start your virtual server
+- Start the Flask application
 
-📱 Two-Factor Authentication (2FA)
+**In a new virtual server (not the one running the Flask)**
+- Add the script `test_2fa_bob.py`
+  - _Copy + Paste Option:_ .\scripts\test_2fa_bob.py
 
-Start Flask-serveren:
+This will run an automatic test showing the 2FA functionality.
 
-python run.py
+## OAuth2
 
+### Quick Reminder Before Test
+- When you get the code from the URL, you have roughly 30 seconds to finish the process before the code becomes invalid. If it becomes invalid, restart the process to get a new code.
 
-Åpne en ny PowerShell og kjør:
+First, you must start the .venv, and then write: python oauth_demo.py
 
-python .\scripts\test_2fa_bob.py
+Once the demo is running, you can write: http://localhost:5000/auth?client_id=demo-client-id&redirect_uri=http://localhost:5000/callback&state=xyz
+- This will give you a new URL containing the code you need for the next part
+- REMEMBER! Don't have the Flask server running, as it will block this process
 
-
-Du får da opp QR-kode og kan teste 2FA-flyten.
-
----
-
-🔑 OAuth2
-
-Når du får en code fra URL-en, har du ~30 sekunder før den utløper.
-
-Start med:
-
-python oauth_demo.py
-
-
-Besøk deretter:
-
-http://localhost:5000/auth?client_id=demo-client-id&redirect_uri=http://localhost:5000/callback&state=xyz
-
-
-Kopier koden fra URL-en (mellom code= og &state) og bruk den:
+Look at the URL, your code will be between "code=" and "&state". Copy this code, add it to the code below and paste it into the Powershell window:
 
 curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_secret=demo-client-secret" -d "redirect_uri=http://localhost:5000/callback" http://localhost:5000/token
 
+- Replace "THE_CODE" part with the actual code you have received
 
-Hvis alt fungerer, får du et access_token, token_type, og expires_in.
+If all goes well, you should see an access token, a token type, and an expiration date.
 
 ---
 
-✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
+
 
 
 
