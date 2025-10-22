@@ -170,7 +170,11 @@ password_hash	TEXT	Hashet passord
 
 created_at	TIMESTAMP	Opprettelsestid
 
+---
+
 🧰 Ekstra funksjonalitet
+
+---
 
 🔐 Brute-force Protection
 
@@ -224,6 +228,7 @@ Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
 
 
 
