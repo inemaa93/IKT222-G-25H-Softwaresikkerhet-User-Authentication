@@ -3,7 +3,7 @@ import bcrypt
 
 # Velg ønsket adminbruker
 username = "admin"
-password = "Admin1234"  # Husk å endre i produksjon
+password = "admin" 
 
 # Hash passordet med bcrypt
 hashed_pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())

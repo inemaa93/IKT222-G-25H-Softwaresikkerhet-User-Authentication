@@ -1,6 +1,6 @@
 from flask import Flask
 from app.auth import auth_bp, bcrypt
-from app.db import init_db
+from db import init_db
 import os
 
 app = Flask(__name__)

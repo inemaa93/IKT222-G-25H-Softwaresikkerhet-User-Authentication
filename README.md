@@ -1,85 +1,141 @@
-# 🔐 Auth Project
+🔐 Auth Project
 
-Dette prosjektet er et Flask-basert autentiseringssystem som håndterer registrering, innlogging og passordhashing.
+Dette prosjektet er et Flask-basert autentiseringssystem som håndterer registrering, innlogging, passordhashing og tofaktorautentisering (2FA).
 
-Prosjektet er delt mellom flere personer – **Person A** (Ine) har ansvaret for å sette opp grunnstrukturen og backend-funksjonaliteten.
+Prosjektet er delt mellom flere personer – Person A (Ine) har ansvaret for å sette opp grunnstrukturen og backend-funksjonaliteten.
 
 ---
 
-## 👩‍💻 Ine – Ansvarsområde
+
+👩‍💻 Ine – Ansvarsområde
 
 Ine har gjort følgende:
 
-- Opprettet prosjektstruktur og aktivert virtuelt miljø (`.venv`)
-- Installert og konfigurert Flask
-- Opprettet SQLite-database (`users.db`) med tabellen `users`
-- Implementert register- og login-endepunkter
-- Sørget for at passord lagres sikkert med `bcrypt`
-- Testet API-endepunkter i PowerShell med `Invoke-RestMethod`
-- Opprettet `.env.example` og README.md for dokumentasjon
+Opprettet prosjektstruktur og aktivert virtuelt miljø (.venv)
+
+Installert og konfigurert Flask
+
+Opprettet SQLite-database (users.db) med tabellen users
+
+Implementert register- og login-endepunkter
+
+Sørget for at passord lagres sikkert med bcrypt
+
+Testet API-endepunkter i PowerShell med Invoke-RestMethod
+
+Opprettet .env.example og README.md for dokumentasjon
+
+Fikset import- og databasepath-feil slik at Flask nå starter riktig
+
+Oppdatert get_db_connection() og db.py
+
+Opprettet seed.py for å legge til admin-bruker automatisk
+
+Lagt til Pillow for QR-kodegenerering (2FA)
+
+Testet hele systemet med pytest – alle tester passerer ✅
 
 ---
 
 ⚙️ Oppsett lokalt
-1. Klon prosjektet
-   
-bash
 
-git clone (https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git)
+1️⃣ Klon prosjektet
 
-cd auth-project
+git clone https://github.com/USERNAME/IKT222-G-25H-Softwaresikkerhet-User-Authentication.git
 
-3. Aktiver virtuelt miljø (Windows) Powershell
-   
+cd IKT222-G-25H-Softwaresikkerhet-User-Authentication
+
+2️⃣ Aktiver virtuelt miljø (Windows PowerShell)
+
 python -m venv .venv
 
 .venv\Scripts\Activate.ps1
 
-5. Installer avhengigheter
-   
-pip install flask bcrypt
+3️⃣ Installer avhengigheter
 
-7. Initialiser databasen
-   
-python app\db.py
+pip install -r requirements.txt
 
-Da skal det komme:
+---
 
-✅ Database initialized.
 
-🚀 Kjør Flask-serveren
+Hvis du ikke har en requirements.txt, kan du opprette den slik:
 
+pip install flask bcrypt qrcode pillow pytest
+
+pip freeze > requirements.txt
+
+---
+
+🗃️ Initialiser databasen
+
+Kjør først:
+
+python db.py
+
+---
+
+
+Du skal få meldingen:
+
+✅ Database initialized with schema.sql
+
+---
+
+
+Deretter opprett admin-brukeren:
+
+python seed.py
+
+---
+
+
+Output:
+
+Admin-bruker 'admin' ble lagt til
+
+---
+
+👤 Standard admin-bruker
+
+Brukernavn: admin
+Passord: admin
+
+---
+
+🚀 Start Flask-serveren
 python run.py
 
-Serveren er på:
+---
 
-http://127.0.0.1:5000
 
-🧩 Test API-endepunktene - Dette gjøres på en ny powershell inne i riktig fil mens den første powershellen har oppe Flask-serveren
+Serveren kjører nå på:
+👉 http://127.0.0.1:5000
+
+---
+
+🧩 Test API-endepunktene
+
+Åpne et nytt PowerShell-vindu (mens serveren kjører i det originale Powershell vinduet).
 
 🔸 Registrer bruker
+Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register" `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{"username":"alice","password":"S3kretPa55"}'
 
-Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/register" 
 
-  -Headers @{ "Content-Type" = "application/json" } 
-  
-  -Body {"username":"alice","password":"S3kretPa55"}
-
-Du skal få følgende beskjed:
+Respons:
 
 message
 -------
 User registered successfully
 
 🔸 Logg inn bruker
+Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/login" `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{"username":"alice","password":"S3kretPa55"}'
 
 
-Invoke-RestMethod -Method POST -Uri "http://127.0.0.1:5000/login" 
-  -Headers @{ "Content-Type" = "application/json" } 
-  
-  -Body {"username":"alice","password":"S3kretPa55"}
-
-Da skal du få fælgende tilbakemelding:
+Respons:
 
 message          user
 -------          ----
@@ -87,18 +143,38 @@ Login successful alice
 
 ---
 
-🗃️ Databasestruktur
+🧪 Kjøre tester
 
-| Kolonne       | Type      | Beskrivelse     |
-| ------------- | --------- | --------------- |
-| id            | INTEGER   | Primærnøkkel    |
-| username      | TEXT      | Brukernavn      |
-| password_hash | TEXT      | Hashet passord  |
-| created_at    | TIMESTAMP | Opprettelsestid |
+Etter at Flask-appen kjører som forventet, kan du teste systemet:
 
+pytest -q
 
 ---
 
+Forventet resultat:
+
+..[100%]2 passed, 7 warnings
+
+---
+
+🧱 Databasestruktur
+
+Kolonne	Type	Beskrivelse
+
+
+id	INTEGER	Primærnøkkel
+
+username	TEXT	Brukernavn
+
+password_hash	TEXT	Hashet passord
+
+created_at	TIMESTAMP	Opprettelsestid
+
+---
+
+🧰 Ekstra funksjonalitet
+
+---
 
 ## Brute-force Protection
 
@@ -146,10 +222,6 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
-
-
-
-
 
 
 
