@@ -57,12 +57,22 @@ pip install -r requirements.txt
 
 ---
 
+⚙️ Pillow
 
-Hvis du ikke har en requirements.txt, kan du opprette den slik:
+**Merk:** prosjektet bruker Pillow for QR-kode-generering (2FA). Hvis ikke Pillow blir nedlastet fra `requirements.txt`, installer det i det aktive virtuelle miljøet:
 
-pip install flask bcrypt qrcode pillow pytest
+
+1. Aktiver `.venv`
+   
+2. Kjør:
+   
+powershell
+
+pip install Pillow
 
 pip freeze > requirements.txt
+
+
 
 ---
 
@@ -227,6 +237,7 @@ Om alt går som det skal, bør du se en "access token" en "token type" og en "ex
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
