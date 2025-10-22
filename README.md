@@ -113,6 +113,8 @@ Login successful alice
 To test the brute-force functionality, you must have a registered user in your system to test it with. Attempt to log in to a user, but write the wrong password three consecutive times. When you go for attempt number four, you will receive a new message, stating that you are currently locked-out and includes a timer (starts at 5 minutes). Each time you attempt to log in before the timer has run out, you will receive the same message (with an updated timer). Once the timer has run out, your attempt record has been reset, and you may retry logging in.
 
 ## Two-Factor Authentication
+_Remember, this step won't work if the lock-out timer from the brute-force protection is still active, so either wait or restart the server if needed._
+
 - Start your virtual server
 - Start the Flask application
 
@@ -144,6 +146,7 @@ If all goes well, you should see an access token, a token type, and an expiratio
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
