@@ -72,32 +72,46 @@ Kjør først:
 
 python db.py
 
+---
+
 
 Du skal få meldingen:
 
 ✅ Database initialized with schema.sql
+
+---
 
 
 Deretter opprett admin-brukeren:
 
 python seed.py
 
+---
+
 
 Output:
 
 Admin-bruker 'admin' ble lagt til
+
+---
 
 👤 Standard admin-bruker
 
 Brukernavn: admin
 Passord: admin
 
+---
+
 🚀 Start Flask-serveren
 python run.py
+
+---
 
 
 Serveren kjører nå på:
 👉 http://127.0.0.1:5000
+
+---
 
 🧩 Test API-endepunktene
 
@@ -127,12 +141,15 @@ message          user
 -------          ----
 Login successful alice
 
+---
+
 🧪 Kjøre tester
 
 Etter at Flask-appen kjører som forventet, kan du teste systemet:
 
 pytest -q
 
+---
 
 Forventet resultat:
 
@@ -153,7 +170,11 @@ password_hash	TEXT	Hashet passord
 
 created_at	TIMESTAMP	Opprettelsestid
 
+---
+
 🧰 Ekstra funksjonalitet
+
+---
 
 🔐 Brute-force Protection
 
@@ -207,6 +228,8 @@ Hvis alt fungerer, får du et access_token, token_type, og expires_in.
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT.
+
+
 
 
 
