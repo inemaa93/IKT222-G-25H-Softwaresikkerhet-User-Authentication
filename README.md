@@ -185,50 +185,49 @@ created_at	TIMESTAMP	Opprettelsestid
 
 ## Brute-force Protection
 
-### Before trying out the brute-force protection: 
-- Start your virtual server
-- Start the Flask application
+### Før du prøver å teste funksjonen: 
+- Start din virtuelle server
+- Start Flask applikasjonen
 
-**In a new virtual server (not the one running the Flask)**
-- Add the script `add_topt_columns.py`
-   - _Copy + Paste Option:_ python .\scripts\add_totp_columns.py
+**I et nytt virtuelt miljø (ikke den som kjører serveren)**
+- Legg til skriptet `add_topt_columns.py`
+   - _Copy + Paste:_ python .\scripts\add_totp_columns.py
 
-To test the brute-force functionality, you must have a registered user in your system to test it with. Attempt to log in to a user, but write the wrong password three consecutive times. When you go for attempt number four, you will receive a new message, stating that you are currently locked-out and includes a timer (starts at 5 minutes). Each time you attempt to log in before the timer has run out, you will receive the same message (with an updated timer). Once the timer has run out, your attempt record has been reset, and you may retry logging in.
+For å teste brute-force funksjonen må du ha en registrert bruker i systemet. Det ligger allerede en admin bruker på systemet om du har gjort de tidligere stegene, men du kan også lage en ny bruker om ønsket. Forsøk å logg inn på brukeren, men skriv feil passord, og gjør dette tre ganger. Dette trigger "lock-out" funksjonen, og om du forsøker å logge inn igjen får du ikke lov, og du får se timeren på lockouten. Denne varer i 5 minutter før du kan forsøke å logge inn på nytt. 
 
 ## Two-Factor Authentication
-_Remember, this step won't work if the lock-out timer from the brute-force protection is still active, so either wait or restart the server if needed._
+_Husk, denne delen funker ikke hvis timeren fra brute-force funksjonen fortsatt er aktiv. Enten vent, eller restart serveren før du går videre._
 
-- Start your virtual server
-- Start the Flask application
+- Start din virtuelle server
+- Start Flask applikasjonen
 
-**In a new virtual server (not the one running the Flask)**
-- Add the script `test_2fa_bob.py`
-  - _Copy + Paste Option:_ .\scripts\test_2fa_bob.py
+**I et nytt virtuelt miljø (ikke den som kjører serveren)**
+- Legg til skriptet `test_2fa_bob.py`
+  - _Copy + Paste:_ .\scripts\test_2fa_bob.py
 
-This will run an automatic test showing the 2FA functionality.
+Dette kjører en automatisk test som viser at 2FA funksjonaliteten fungerer som den skal.
 
 ## OAuth2
 
-### Quick Reminder Before Test
-- When you get the code from the URL, you have roughly 30 seconds to finish the process before the code becomes invalid. If it becomes invalid, restart the process to get a new code.
+### Viktig informasjon før du kjører testen
+- Når du skal hente koden fra URLen, har du ca 30 sekunder på å fullføre resten av prosessen før koden blir avvist. Om den blir avvist må du starte forsøket på nytt og få en ny kode.
+- Ikke ha FLask serveren i gang når du forsøker denne delen, da de konflikter med hverandre.
 
-First, you must start the .venv, and then write: python oauth_demo.py
+Først må du starte den virtuelle serveren, og skrive: `python oauth_demo.py`
 
-Once the demo is running, you can write: http://localhost:5000/auth?client_id=demo-client-id&redirect_uri=http://localhost:5000/callback&state=xyz
-- This will give you a new URL containing the code you need for the next part
-- REMEMBER! Don't have the Flask server running, as it will block this process
+Dette starter en demo, og da må du bruke denne lenken i en browser: http://localhost:5000/auth?client_id=demo-client-id&redirect_uri=http://localhost:5000/callback&state=xyz
+- I URLen vil du få en kode som skal brukes til neste del
 
-Look at the URL, your code will be between "code=" and "&state". Copy this code, add it to the code below and paste it into the Powershell window:
+- I URLen, mellom "code=" og "&state" ligger koden din, og denne skal du sette inn i koden under (bytt det ut med "THE_CODE" delen):
 
 curl.exe -X POST -d "code=THE_CODE" -d "client_id=demo-client-id" -d "client_secret=demo-client-secret" -d "redirect_uri=http://localhost:5000/callback" http://localhost:5000/token
 
-- Replace "THE_CODE" part with the actual code you have received
-
-If all goes well, you should see an access token, a token type, and an expiration date.
+Om alt går som det skal, bør du se en "access token" en "token type" og en "expiration date".
 
 ---
 
 ✅ Dette prosjektet ble gjennomført med hjelp av ChatGPT
+
 
 
 
